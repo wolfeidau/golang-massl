@@ -7,8 +7,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-
-	"github.com/pkg/errors"
 )
 
 func main() {
@@ -17,7 +15,7 @@ func main() {
 
 	caCert, err := ioutil.ReadFile("./certs/ca.pem")
 	if err != nil {
-		log.Fatal(errors.Wrap(err, "failed to load cert"))
+		log.Fatalf("failed to load cert: %s", err)
 	}
 
 	caCertPool := x509.NewCertPool()
@@ -49,7 +47,10 @@ func main() {
 		log.Printf("%s client common name: %+v", tag, conn.ConnectionState().PeerCertificates[0].Subject.CommonName)
 	}
 
-	conn.Write([]byte("abc123\n"))
+	_, err = conn.Write([]byte("abc123\n"))
+	if err != nil {
+		log.Fatalf("failed to write line: %s", err)
+	}
 
 	log.Printf("%s write", tag)
 
