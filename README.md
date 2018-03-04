@@ -1,6 +1,12 @@
 # golang-massl
 
-This project provides some simple examples of configuring mutual authentication (MASSL) over TLS using x509 certificates. 
+This project provides some simple examples of configuring mutual authentication (MASSL) over TLS using x509 certificates.
+
+# MASSL?
+
+The purpose of mutual authentication with TLS using x509 certificates is to enable verification of incoming connections using a robust and reliable mechanism. Doing it at the TLS level also reduces exposure of the service to probing by third parties as without a signed client certificate they won't get past the handshake.
+
+One downside to this approach is that it can be difficult to debug connection failures as `alert` the TLS layer sends back may not be surfaced by the client.
 
 # setup 
 
