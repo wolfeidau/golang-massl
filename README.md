@@ -52,18 +52,18 @@ cfssl gencert \
   client-csr.json | cfssljson -bare client
 ```
 
-# running
+# running TCP/TLS echo
 
 From the root of the project you can start the simple echo server in one terminal.
 
 ```
-go run cmd/mass-tls-server
+go run cmd/mass-tls-server/main.go
 ```
 
 Then run the client in another.
 
 ```
-go run cmd/mass-tls-client
+go run cmd/mass-tls-client/main.go
 ```
 
 The output of the server should look something like.
@@ -83,6 +83,39 @@ The output of the client should look something like.
 2018/03/04 10:27:54 [127.0.0.1:50388 -> 127.0.0.1:2222] write
 2018/03/04 10:27:54 [127.0.0.1:50388 -> 127.0.0.1:2222] line: abc123
 ```
+
+# running HTTPS echo
+
+From the root of the project you can start the simple https server in one terminal.
+
+```
+go run cmd/mass-https/*.go server
+```
+
+Then run the client in another.
+
+```
+go run cmd/mass-https/*.go client
+```
+
+The output of the server should look something like.
+
+```
+2018/03/04 15:44:10 listen: https://localhost:2223
+2018/03/04 15:46:57 [/echo -> 127.0.0.1:53277] accept
+2018/03/04 15:46:57 [/echo -> 127.0.0.1:53277] client common name: system:client
+2018/03/04 15:46:57 [/echo -> 127.0.0.1:53277] line: abc123
+```
+
+The output of the client should look something like.
+
+```
+2018/03/04 15:46:57 url: https://localhost:2223/echo
+2018/03/04 15:46:57 [-> localhost:2223] accept
+2018/03/04 15:46:57 [-> localhost:2223] client common name: system:server
+2018/03/04 15:46:57 [-> localhost:2223] line: abc123
+```
+
 
 # references
 

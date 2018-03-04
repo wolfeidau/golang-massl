@@ -25,7 +25,6 @@ func main() {
 		Certificates: []tls.Certificate{cert}, // this certificate is used to sign the handshake
 		RootCAs:      caCertPool,              // this is used to validate the server certificate
 	}
-
 	tlsConfig.BuildNameToCertificate()
 
 	conn, err := tls.Dial("tcp", "localhost:2222", tlsConfig)
