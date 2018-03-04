@@ -6,7 +6,7 @@ This project provides some simple examples of configuring mutual authentication 
 
 The purpose of mutual authentication with TLS using x509 certificates is to enable verification of incoming connections using a robust and reliable mechanism. Doing it at the TLS level also reduces exposure of the service to probing by third parties as without a signed client certificate they won't get past the handshake.
 
-One downside to this approach is that it can be difficult to debug connection failures as `alert` the TLS layer sends back may not be surfaced by the client.
+One downside to this approach is that it can be difficult to debug connection failures as the `alert` which TLS server sends back may not be surfaced by the client.
 
 # setup 
 
@@ -83,6 +83,11 @@ The output of the client should look something like.
 2018/03/04 10:27:54 [127.0.0.1:50388 -> 127.0.0.1:2222] write
 2018/03/04 10:27:54 [127.0.0.1:50388 -> 127.0.0.1:2222] line: abc123
 ```
+
+# references
+
+* [wikipedia: Mutual authentication](https://en.wikipedia.org/wiki/Mutual_authentication)
+* [Traffic Analysis of an SSL/TLS Session](http://blog.fourthbit.com/2014/12/23/traffic-analysis-of-an-ssl-slash-tls-session)
 
 # license
 This code is released under MIT License, and is copyright Mark Wolfe.  
